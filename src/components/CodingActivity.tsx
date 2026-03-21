@@ -8,33 +8,25 @@ export default function CodingActivity() {
     hidden: { opacity: 0 },
     visible: { 
       opacity: 1,
-      transition: { staggerChildren: 0.2 }
+      transition: { staggerChildren: 0.15 }
     }
   };
 
-  const leftVariants = {
-    hidden: { opacity: 0, x: -30 },
-    visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } }
-  };
-
-  const rightVariants = {
-    hidden: { opacity: 0, x: 30 },
-    visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } }
-  };
-
-  const cardVariants = {
-    hidden: { opacity: 0, scale: 0.95 },
-    visible: { opacity: 1, scale: 1, transition: { duration: 0.5, ease: "easeOut" } }
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
   };
 
   return (
     <section id="activity" className="py-24 px-6 lg:px-12 relative z-10 w-full max-w-7xl mx-auto overflow-hidden">
+      
+      {/* Header */}
       <div className="flex flex-col items-center mb-16">
         <motion.h2 
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-4xl md:text-5xl font-extrabold text-white tracking-tight uppercase text-center"
+          className="text-4xl md:text-5xl font-extrabold text-black dark:text-white tracking-tight uppercase text-center"
         >
           Activity & Stats
         </motion.h2>
@@ -43,7 +35,7 @@ export default function CodingActivity() {
           whileInView={{ opacity: 1, scaleX: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.2, duration: 0.5 }}
-          className="h-1 w-20 bg-gradient-to-r from-gray-500 to-blue-500 mt-4 rounded-full origin-center" 
+          className="h-1 w-20 bg-gray-400 dark:bg-gray-600 mt-4 rounded-full origin-center" 
         />
       </div>
 
@@ -51,112 +43,138 @@ export default function CodingActivity() {
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, margin: "-50px" }}
-        className="flex flex-col lg:flex-row gap-8 lg:gap-12"
+        viewport={{ once: true, margin: "-100px" }}
+        className="flex flex-col lg:flex-row gap-8 lg:gap-10"
       >
-        {/* LEFT SIDE: Description */}
-        <motion.div variants={leftVariants} className="w-full lg:w-1/3 flex flex-col space-y-8">
-          <div className="bg-[#0f172a] p-8 rounded-2xl border border-white/10 shadow-xl h-full flex flex-col">
-            <h3 className="flex items-center gap-3 text-2xl font-bold text-white mb-6">
+        
+        {/* LEFT SIDE: Problem Solving Details */}
+        <motion.div variants={itemVariants} className="w-full lg:w-1/3 flex flex-col text-black dark:text-white">
+          <div className="bg-white dark:bg-[#0a0a0a] p-8 rounded-2xl border border-black/10 dark:border-white/10 shadow-[0_0_30px_rgba(0,0,0,0.05)] dark:shadow-[0_0_30px_rgba(255,255,255,0.02)] h-full flex flex-col group hover:border-black/20 dark:hover:border-white/20 hover:scale-[1.02] transition-all duration-500">
+            <h3 className="flex items-center gap-3 text-2xl font-bold mb-6 tracking-wide">
               💻 Problem Solving
             </h3>
             
-            <div className="space-y-5 text-[#cbd5e1] font-light leading-relaxed flex-1">
+            <div className="space-y-6 text-slate-600 dark:text-gray-400 font-light leading-relaxed flex-1">
               <p className="flex items-start gap-3">
-                <span className="text-gray-400 mt-1">▹</span>
+                <span className="text-gray-400 dark:text-gray-500 mt-1">▹</span>
                 Practiced Data Structures & Algorithms aggressively to refine logic building.
               </p>
               <p className="flex items-start gap-3">
-                <span className="text-gray-400 mt-1">▹</span>
+                <span className="text-gray-400 dark:text-gray-500 mt-1">▹</span>
                 Solved problems consistently on LeetCode and GeeksforGeeks.
               </p>
               <p className="flex items-start gap-3">
-                <span className="text-gray-400 mt-1">▹</span>
+                <span className="text-gray-400 dark:text-gray-500 mt-1">▹</span>
                 Strong foundational knowledge in arrays, recursion, and core data structures.
               </p>
             </div>
 
             <div className="mt-8 flex flex-col gap-3">
-              <a href="https://leetcode.com/" target="_blank" rel="noreferrer" className="w-full flex items-center justify-between px-5 py-3.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl text-white font-medium transition-all hover:border-orange-500/50 hover:shadow-[0_0_15px_rgba(249,115,22,0.2)] group">
-                <span className="flex items-center gap-2">
-                  <Code size={18} className="text-orange-500" /> LeetCode
+              <a href="https://leetcode.com/u/piyushsingh19/" target="_blank" rel="noreferrer" className="w-full flex items-center justify-between px-5 py-4 bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 border border-black/5 dark:border-white/5 rounded-xl text-black dark:text-white font-medium transition-all hover:border-orange-500/30 dark:hover:border-orange-500/30 group btn">
+                <span className="flex items-center gap-3">
+                  <Code size={18} className="text-orange-500" /> LeetCode Profile
                 </span>
-                <ExternalLink size={16} className="opacity-50 group-hover:opacity-100 transition-opacity group-hover:translate-x-1 group-hover:-translate-y-1 transform duration-300" />
+                <ExternalLink size={16} className="text-gray-400 dark:text-gray-500 group-hover:text-black dark:group-hover:text-white transition-colors" />
               </a>
-              <a href="https://auth.geeksforgeeks.org/" target="_blank" rel="noreferrer" className="w-full flex items-center justify-between px-5 py-3.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl text-white font-medium transition-all hover:border-green-500/50 hover:shadow-[0_0_15px_rgba(34,197,94,0.2)] group">
-                <span className="flex items-center gap-2">
-                  <Activity size={18} className="text-green-500" /> GeeksforGeeks
+              <a href="https://www.geeksforgeeks.org/user/piyushsingh1902/" target="_blank" rel="noreferrer" className="w-full flex items-center justify-between px-5 py-4 bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 border border-black/5 dark:border-white/5 rounded-xl text-black dark:text-white font-medium transition-all hover:border-green-500/30 dark:hover:border-green-500/30 group btn">
+                <span className="flex items-center gap-3">
+                  <Activity size={18} className="text-green-500" /> GFG Profile
                 </span>
-                <ExternalLink size={16} className="opacity-50 group-hover:opacity-100 transition-opacity group-hover:translate-x-1 group-hover:-translate-y-1 transform duration-300" />
+                <ExternalLink size={16} className="text-gray-400 dark:text-gray-500 group-hover:text-black dark:group-hover:text-white transition-colors" />
               </a>
             </div>
           </div>
         </motion.div>
 
-        {/* RIGHT SIDE: Stats & Graphs */}
-        <motion.div variants={rightVariants} className="w-full lg:w-2/3 flex flex-col space-y-8">
+        {/* RIGHT SIDE: Interactive Global Widgets */}
+        <div className="w-full lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-6">
           
-          {/* Section 1: Coding Activity */}
-          <div className="space-y-4">
-            <h3 className="flex items-center gap-3 text-2xl font-bold text-white mb-4 pl-2">
-              <Activity className="text-blue-400" size={24} />
-              Coding Activity
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <motion.div variants={cardVariants} className="bg-[#0f172a] p-4 rounded-xl border border-white/10 hover:border-white/20 hover:shadow-[0_0_20px_rgba(59,130,246,0.1)] transition-all flex items-center justify-center min-h-[160px] overflow-hidden group">
-                {/* LeetCode Stats Placeholder */}
-                <div className="text-center w-full relative">
-                  <div className="absolute inset-0 bg-gradient-to-tr from-orange-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
-                  <img src="https://leetcard.jacoblin.cool/PiyushSengar?theme=dark&font=Space%20Mono&ext=activity" alt="LeetCode Stats Placeholder" className="rounded-lg opacity-80 group-hover:opacity-100 transition-opacity max-h-36 object-cover mx-auto w-full" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
-                </div>
-              </motion.div>
-              <motion.div variants={cardVariants} className="bg-[#0f172a] p-6 rounded-xl border border-white/10 hover:border-white/20 hover:shadow-[0_0_20px_rgba(34,197,94,0.1)] transition-all flex items-center justify-center min-h-[160px] group relative overflow-hidden">
-                {/* GFG Stats Custom Graph (Faux for Visual) */}
-                <div className="absolute inset-0 bg-gradient-to-tr from-green-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
-                <div className="text-center w-full">
-                  <p className="text-white/80 font-mono text-sm mb-4">GFG Problem Solved (Monthly)</p>
-                  <div className="flex gap-2 lg:gap-3 justify-center items-end h-[70px] opacity-70 group-hover:opacity-100 transition-opacity">
-                    {[30, 45, 60, 40, 80, 55, 95].map((h, i) => (
-                      <motion.div 
-                        initial={{ height: 0 }}
-                        whileInView={{ height: `${h}%` }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 1, delay: i * 0.1 }}
-                        key={i} 
-                        className="w-4 bg-gradient-to-t from-green-600 to-green-400 rounded-sm" 
-                      />
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-            </div>
-          </div>
-
-          {/* Section 2: GitHub Activity */}
-          <div className="space-y-4 pt-4 border-t border-white/5">
-            <h3 className="flex items-center gap-3 text-2xl font-bold text-white mb-4 pl-2">
-              <Github className="text-white" size={24} />
-              GitHub Activity
+          {/* GitHub Massive Dashboard */}
+          <motion.div variants={itemVariants} className="md:col-span-2 bg-white dark:bg-[#0a0a0a] rounded-2xl border border-black/10 dark:border-white/10 hover:border-black/20 dark:hover:border-white/20 hover:scale-[1.01] transition-all duration-500 p-6 flex flex-col gap-6 shadow-[0_0_30px_rgba(0,0,0,0.05)] dark:shadow-[0_0_30px_rgba(255,255,255,0.02)]">
+            <h3 className="text-black dark:text-white font-bold flex items-center gap-3 tracking-wide text-lg">
+              <Github size={20} className="text-gray-500 dark:text-gray-400" /> GitHub Statistics
             </h3>
             
-            <motion.div variants={cardVariants} className="bg-[#0f172a] p-5 rounded-xl border border-white/10 hover:border-white/20 hover:shadow-[0_0_20px_rgba(255,255,255,0.05)] transition-all overflow-hidden flex justify-center w-full">
-              {/* GitHub Contribution Heatmap Placeholder */}
-              <div className="w-full overflow-x-auto scroller">
-                 <img src="https://ghchart.rshah.org/2180c5/PiyushSengar" alt="GitHub Contributions" className="opacity-80 hover:opacity-100 transition-opacity min-w-[600px] h-[110px] object-cover mx-auto hue-rotate-15 mix-blend-screen" />
-              </div>
-            </motion.div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <motion.div variants={cardVariants} className="bg-[#0f172a] rounded-xl border border-white/10 hover:border-white/20 hover:shadow-[0_0_20px_rgba(255,255,255,0.05)] transition-all flex justify-center overflow-hidden">
-                <img src="https://github-readme-stats.vercel.app/api?username=PiyushSengar&theme=tokyonight&hide_border=true&show_icons=true&bg_color=0f172a" alt="GitHub Stats" className="opacity-90 hover:opacity-100 transition-opacity w-full object-cover mix-blend-screen" />
-              </motion.div>
-              <motion.div variants={cardVariants} className="bg-[#0f172a] rounded-xl border border-white/10 hover:border-white/20 hover:shadow-[0_0_20px_rgba(255,255,255,0.05)] transition-all flex justify-center overflow-hidden">
-                <img src="https://github-readme-streak-stats.herokuapp.com/?user=PiyushSengar&theme=tokyonight&hide_border=true&background=0f172a" alt="GitHub Streak" className="opacity-90 hover:opacity-100 transition-opacity w-full object-cover mix-blend-screen" />
-              </motion.div>
+            <div className="flex flex-col xl:flex-row gap-4 justify-center items-center w-full">
+              {/* GitHub API Readme Stats */}
+              <img 
+                src="https://github-readme-stats.vercel.app/api?username=piyushsingh19022002&show_icons=true&theme=transparent&title_color=000&text_color=000" 
+                alt="GitHub Stats" 
+                className="w-full xl:w-1/2 rounded-xl object-contain border border-black/5 dark:border-white/5 dark:hidden" 
+              />
+              <img 
+                src="https://github-readme-stats.vercel.app/api?username=piyushsingh19022002&show_icons=true&theme=dark" 
+                alt="GitHub Stats" 
+                className="w-full xl:w-1/2 rounded-xl object-contain border border-black/5 dark:border-white/5 hidden dark:block" 
+              />
+              
+              {/* GitHub API Streak Stats */}
+              <img 
+                src="https://github-readme-streak-stats.herokuapp.com/?user=piyushsingh19022002&theme=transparent&hide_border=true&title_color=000&text_color=000" 
+                alt="GitHub Streak" 
+                className="w-full xl:w-1/2 rounded-xl object-contain border border-black/5 dark:border-white/5 dark:hidden" 
+              />
+              <img 
+                src="https://github-readme-streak-stats.herokuapp.com/?user=piyushsingh19022002&theme=dark" 
+                alt="GitHub Streak" 
+                className="w-full xl:w-1/2 rounded-xl object-contain border border-black/5 dark:border-white/5 hidden dark:block" 
+              />
             </div>
-          </div>
+            
+            {/* GitHub Contributions Render */}
+            <div className="w-full pt-4 border-t border-black/10 dark:border-white/5 flex flex-col items-center">
+               <span className="text-xs text-slate-500 dark:text-gray-500 uppercase tracking-widest mb-4">Contribution Graph</span>
+               <div className="w-full overflow-x-auto scroller pb-2">
+                 <img 
+                   src="https://ghchart.rshah.org/piyushsingh19022002" 
+                   alt="GitHub Commits Graph" 
+                   className="min-w-[700px] w-full object-cover dark:invert opacity-80 hover:opacity-100 transition-opacity" 
+                 />
+               </div>
+            </div>
+          </motion.div>
 
-        </motion.div>
+          {/* LeetCode Card */}
+          <motion.div variants={itemVariants} className="bg-white dark:bg-[#0a0a0a] rounded-2xl border border-black/10 dark:border-white/10 hover:border-black/20 dark:hover:border-white/20 hover:scale-[1.02] transition-all duration-300 p-6 flex flex-col items-center shadow-[0_0_30px_rgba(0,0,0,0.05)] dark:shadow-[0_0_30px_rgba(255,255,255,0.02)] h-full justify-center">
+            <h3 className="text-black dark:text-white font-bold flex items-center gap-3 w-full mb-6 tracking-wide text-lg">
+              <Code size={20} className="text-orange-500" /> LeetCode Metrics
+            </h3>
+            <img 
+              src="https://leetcard.jacoblin.cool/piyushsingh19?theme=light" 
+              alt="LeetCode Stats Card" 
+              className="w-full object-contain rounded-xl border border-black/5 dark:border-white/5 dark:hidden" 
+            />
+            <img 
+              src="https://leetcard.jacoblin.cool/piyushsingh19?theme=dark" 
+              alt="LeetCode Stats Card" 
+              className="w-full object-contain rounded-xl border border-black/5 dark:border-white/5 hidden dark:block" 
+            />
+          </motion.div>
+
+          {/* GeeksForGeeks Interactive Card */}
+          <motion.a 
+            href="https://www.geeksforgeeks.org/user/piyushsingh1902/" 
+            target="_blank" 
+            rel="noreferrer"
+            variants={itemVariants} 
+            className="bg-white dark:bg-[#0a0a0a] rounded-2xl border border-black/10 dark:border-white/10 hover:border-black/20 dark:hover:border-white/20 hover:scale-[1.02] hover:bg-gray-50 dark:hover:bg-white/5 transition-all duration-300 p-6 flex flex-col items-center justify-center text-center gap-5 shadow-[0_0_30px_rgba(0,0,0,0.05)] dark:shadow-[0_0_30px_rgba(255,255,255,0.02)] group cursor-pointer h-full min-h-[250px]"
+          >
+            <div className="w-20 h-20 rounded-full bg-green-500/10 flex items-center justify-center group-hover:bg-green-500/20 group-hover:scale-110 transition-all duration-300 mb-2">
+              <Activity size={36} className="text-green-500" />
+            </div>
+            
+            <div className="space-y-1 mt-auto">
+              <h4 className="text-black dark:text-white font-bold text-xl tracking-wide">GeeksforGeeks Profile</h4>
+              <p className="text-slate-500 dark:text-gray-400 text-sm group-hover:text-slate-700 dark:group-hover:text-gray-300 transition-colors">@piyushsingh1902</p>
+            </div>
+
+            <div className="mt-auto text-xs font-mono uppercase tracking-widest bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 px-5 py-2.5 rounded-full text-zinc-600 dark:text-white/70 group-hover:bg-black/10 dark:group-hover:bg-white/10 group-hover:border-black/20 dark:group-hover:border-white/20 group-hover:text-black dark:group-hover:text-white transition-all flex items-center gap-2">
+              View Profile <ExternalLink size={14} />
+            </div>
+          </motion.a>
+
+        </div>
+
       </motion.div>
     </section>
   );

@@ -1,16 +1,74 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Github, ExternalLink, Terminal, Code2 } from "lucide-react";
+import { motion, useInView } from "framer-motion";
+import { Github, ExternalLink } from "lucide-react";
+import { useEffect, useState, useRef } from "react";
+import Image from "next/image";
+import vocalImg from "@/assets/vocal.png";
+import cleanupImg from "@/assets/cleanup.png";
+import waterImg from "@/assets/water.png";
+
+// Native Typewriter Component triggered on scroll-view
+function TerminalTypewriter({ text }: { text: string }) {
+  const [displayedText, setDisplayedText] = useState("");
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  useEffect(() => {
+    if (!isInView) return;
+    
+    let index = 0;
+    const interval = setInterval(() => {
+      setDisplayedText((prev) => prev + text.charAt(index));
+      index++;
+      if (index >= text.length) clearInterval(interval);
+    }, 15); // Ultra-fast terminal print speed
+
+    return () => clearInterval(interval);
+  }, [text, isInView]);
+
+  return (
+    <div ref={ref} className="font-mono text-xs sm:text-sm leading-relaxed text-slate-700 dark:text-gray-300 whitespace-pre-wrap">
+      {displayedText}
+      <motion.span
+        animate={{ opacity: [1, 0, 1] }}
+        transition={{ repeat: Infinity, duration: 0.8 }}
+        className="ml-1 inline-block w-2 sm:w-2.5 h-3 sm:h-4 bg-slate-500 dark:bg-gray-400 align-middle"
+      />
+    </div>
+  );
+}
 
 export default function Projects() {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: { 
-      opacity: 1, 
-      transition: { staggerChildren: 0.2 } 
+  const projectsData = [
+    {
+      title: "Vocal Platform",
+      description: "A multilingual language learning platform with audio lessons, quizzes, and personalized learning.",
+      features: ["JWT Authentication", "Audio playback system", "Gamification features"],
+      tech: ["React", "Node.js", "MongoDB"],
+      github: "https://github.com/piyushsingh19022002/Vocal---Language-Learning-Platform",
+      demo: "https://llp-7khm.vercel.app/",
+      image: vocalImg,
+    },
+    {
+      title: "CleanUpCrew",
+      description: "Platform for community cleanup events featuring chatbot integration and location-based coordination.",
+      features: ["Chatbot integration", "Location-based tracking", "Community events"],
+      tech: ["React", "Node.js", "MongoDB"],
+      github: "https://github.com/piyushsingh19022002/CleanUpCrew-Community-Cleanup-Event-ChatBotAI",
+      demo: "#",
+      image: cleanupImg,
+    },
+    {
+      title: "Delhi Water Monitoring",
+      description: "Water quality monitoring system integrated with data visualization for immediate insights.",
+      features: ["Real-time monitoring", "Data visualization", "Automated alerts"],
+      tech: ["PHP", "MySQL", "JavaScript"],
+      github: "https://github.com/piyushsingh19022002/Delhi-Water-Monitoring-System",
+      demo: "#",
+      image: waterImg,
     }
-  };
+  ];
 
   const slideInLeft = {
     hidden: { opacity: 0, x: -50 },
@@ -22,50 +80,15 @@ export default function Projects() {
     visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: "easeOut" } }
   };
 
-  const projectsData = [
-    {
-      title: "Vocal Platform",
-      description: "A multilingual language learning platform with audio lessons, quizzes, and personalized learning features.",
-      features: ["JWT Authentication", "Audio playback system", "Gamification features"],
-      tech: ["React", "Node.js", "MongoDB"],
-      github: "https://github.com/PiyushSengar",
-      demo: "#",
-      glowColor: "from-gray-500/20 to-blue-500/20",
-      accent: "text-gray-400",
-      borderHover: "hover:border-gray-500 hover:shadow-[0_0_50px_rgba(75,85,99,0.2)]",
-    },
-    {
-      title: "CleanUpCrew",
-      description: "Platform for community cleanup events featuring chatbot integration and location-based coordination.",
-      features: ["Chatbot integration", "Location-based tracking", "Community events"],
-      tech: ["React", "Node.js", "MongoDB"],
-      github: "https://github.com/PiyushSengar",
-      demo: "#",
-      glowColor: "from-emerald-500/20 to-green-500/20",
-      accent: "text-emerald-400",
-      borderHover: "hover:border-emerald-500 hover:shadow-[0_0_50px_rgba(16,185,129,0.2)]",
-    },
-    {
-      title: "Delhi Water Monitoring",
-      description: "Water quality monitoring system integrated with data visualization for immediate insights.",
-      features: ["Real-time monitoring", "Data visualization", "Automated alerts"],
-      tech: ["PHP", "MySQL", "JavaScript"],
-      github: "https://github.com/PiyushSengar",
-      demo: "#",
-      glowColor: "from-blue-500/20 to-cyan-500/20",
-      accent: "text-blue-400",
-      borderHover: "hover:border-blue-500 hover:shadow-[0_0_50px_rgba(59,130,246,0.2)]",
-    }
-  ];
-
   return (
     <section id="projects" className="py-24 px-6 lg:px-12 relative z-10 w-full max-w-7xl mx-auto overflow-hidden">
+      
       <div className="flex flex-col items-center mb-24">
         <motion.h2 
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-4xl md:text-5xl font-extrabold text-white tracking-tight uppercase"
+          className="text-4xl md:text-5xl font-extrabold text-black dark:text-white tracking-tight uppercase"
         >
           Projects
         </motion.h2>
@@ -74,7 +97,7 @@ export default function Projects() {
           whileInView={{ opacity: 1, scaleX: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.2, duration: 0.5 }}
-          className="h-1 w-20 bg-gradient-to-r from-gray-500 to-blue-500 mt-4 rounded-full origin-left" 
+          className="h-1 w-20 bg-gray-400 dark:bg-gray-600 mt-4 rounded-full origin-left" 
         />
       </div>
 
@@ -82,122 +105,86 @@ export default function Projects() {
         {projectsData.map((project, index) => {
           const isEven = index % 2 === 0;
 
+          // Process terminal structural text dynamically for each project
+          const terminalContent = `> cat ${project.title.toLowerCase().replace(/\s+/g, '_')}.md\n\n📁 ${project.title}\n\n> ${project.description}\n\n⚙ Key Features:\n${project.features.map(f => `* ${f}`).join('\n')}\n\n🛠 Tech Stack:\n${project.tech.map(t => `* ${t}`).join('\n')}`;
+
           return (
             <motion.div 
               key={index}
-              variants={containerVariants}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-100px" }}
-              className={`grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 items-center`}
+              className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-center"
             >
-              {/* Laptop Mockup */}
+              
+              {/* LEFT SIDE: Laptop Mockup */}
               <motion.div 
                 variants={isEven ? slideInLeft : slideInRight} 
-                className={`relative group perspective-[1000px] w-full max-w-xl mx-auto md:max-w-none ${!isEven ? "md:order-2" : ""}`}
+                className={`w-full lg:w-1/2 flex justify-center ${!isEven ? "lg:order-2" : "lg:order-1"}`}
               >
-                <div className="relative w-full transform transition-transform duration-500 group-hover:-translate-y-2 group-hover:scale-[1.02]">
-                  {/* Screen border */}
-                  <div className="bg-[#1e1e1e] p-2 md:p-3 rounded-t-2xl md:rounded-t-3xl border-t border-x border-white/20 shadow-2xl relative z-10">
-                    <div className="absolute top-1 lg:top-1.5 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-black/50" />
-                    <div className="bg-[#0a0a0a] rounded-lg md:rounded-xl overflow-hidden aspect-[16/10] relative flex items-center justify-center border border-black shadow-inner">
-                      <div className={`absolute inset-0 bg-gradient-to-br ${project.glowColor} mix-blend-screen opacity-50`} />
-                      <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/90 to-transparent" />
+                <div className="group relative w-full max-w-lg transition-transform duration-500 hover:scale-[1.02] hover:-rotate-1">
+                  {/* Screen Frame */}
+                  <div className="bg-[#121212] p-2 sm:p-3 rounded-t-2xl sm:rounded-t-3xl border-t border-x border-white/20 shadow-2xl relative z-10">
+                    <div className="absolute top-1 sm:top-1.5 left-1/2 -translate-x-1/2 flex justify-center">
+                       <div className="w-1.5 h-1.5 rounded-full bg-white/20" /> {/* Mac Camera dot */}
+                    </div>
+                    {/* Inner Screen */}
+                    <div className="bg-[#050505] relative aspect-[16/10] rounded-lg overflow-hidden border border-white/5 flex items-center justify-center shadow-inner group-hover:scale-105 transition-transform duration-500">
                       
-                      <div className="absolute inset-0 opacity-20 flex flex-col p-4 md:p-6 gap-2 md:gap-3 pointer-events-none">
-                        <div className="h-2 w-1/4 bg-blue-500 rounded" />
-                        <div className="h-2 w-1/2 bg-gray-500 rounded ml-4" />
-                        <div className="h-2 w-1/3 bg-white rounded ml-4" />
-                        <div className="h-2 w-2/3 bg-white rounded" />
-                        <div className="h-2 w-1/5 bg-blue-500 rounded ml-8" />
-                      </div>
+                      {/* Sub-graphic screen bleed */}
+                      <div className="absolute inset-0 bg-white/5 mix-blend-screen opacity-50 z-20 pointer-events-none" />
                       
-                      <Code2 size={56} className="text-white/20 z-10 drop-shadow-2xl" />
-                      
-                      <div className="absolute top-3 left-3 md:top-4 md:left-4 flex gap-1.5 md:gap-2">
-                        <div className="w-2 md:w-2.5 h-2 md:h-2.5 rounded-full bg-red-500/80" />
-                        <div className="w-2 md:w-2.5 h-2 md:h-2.5 rounded-full bg-yellow-500/80" />
-                        <div className="w-2 md:w-2.5 h-2 md:h-2.5 rounded-full bg-green-500/80" />
-                      </div>
+                      {/* Project Image Native Rendering */}
+                      <Image 
+                        src={project.image} 
+                        alt={project.title} 
+                        className="w-full h-full object-cover z-10"
+                        priority={index <= 1}
+                      />
                     </div>
                   </div>
-                  {/* Keyboard base */}
-                  <div className="h-3 md:h-5 w-[110%] -left-[5%] relative bg-gradient-to-b from-[#2a2a2a] to-[#0a0a0a] rounded-b-lg md:rounded-b-2xl border-x border-b border-white/5 shadow-[0_25px_50px_rgba(0,0,0,0.9)] z-20 flex justify-center">
-                    <div className="w-1/4 h-1 md:h-1.5 bg-[#121212] rounded-b-md shadow-inner" />
+                  {/* Laptop Base */}
+                  <div className="relative h-4 sm:h-5 w-[110%] -left-[5%] bg-gradient-to-b from-gray-300 to-gray-500 rounded-b-xl sm:rounded-b-2xl shadow-[0_20px_40px_rgba(0,0,0,0.8)] border-b border-gray-600 z-20 flex justify-center">
+                    <div className="w-1/4 h-1 sm:h-1.5 bg-gray-400 rounded-b-md shadow-inner" />
                   </div>
-                  
-                  {/* Glow under laptop */}
-                  <div className={`absolute -bottom-10 left-1/2 -translate-x-1/2 w-[80%] h-12 bg-gradient-to-r ${project.glowColor} blur-[40px] rounded-full pointer-events-none z-0`} />
                 </div>
               </motion.div>
 
-              {/* Terminal UI */}
+              {/* RIGHT SIDE: Terminal UI */}
               <motion.div 
                 variants={isEven ? slideInRight : slideInLeft} 
-                className={`h-full flex items-center ${!isEven ? "md:order-1" : ""}`}
+                className={`w-full lg:w-1/2 h-full ${!isEven ? "lg:order-1" : "lg:order-2"}`}
               >
-                <div className={`w-full bg-[#020617] rounded-xl border border-white/10 shadow-[0_0_40px_rgba(0,0,0,0.5)] overflow-hidden font-mono text-sm group transition-all duration-500 hover:border-white/20 ${project.borderHover}`}>
-                  {/* Terminal Header */}
-                  <div className="bg-[#0f172a]/80 border-b border-white/10 px-4 py-3 flex items-center justify-between backdrop-blur-md">
-                    <div className="flex gap-2">
+                <div className="w-full bg-white dark:bg-[#0a0a0a] rounded-xl border border-black/10 dark:border-white/10 shadow-[0_0_30px_rgba(0,0,0,0.05)] dark:shadow-[0_0_30px_rgba(255,255,255,0.03)] overflow-hidden flex flex-col">
+                  {/* MacOS Terminal Window Header */}
+                  <div className="bg-gray-100 dark:bg-[#1e1e1e] border-b border-black/10 dark:border-white/10 px-4 py-3 flex items-center relative">
+                    <div className="flex gap-2 absolute left-4">
                       <div className="w-3 h-3 rounded-full bg-red-500/80" />
                       <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
                       <div className="w-3 h-3 rounded-full bg-green-500/80" />
                     </div>
-                    <div className="text-white/40 text-xs flex items-center gap-2 tracking-widest hidden sm:flex">
-                      <Terminal size={14} />
-                      <span>bash - {project.title.toLowerCase().replace(/\s+/g, '-')}</span>
+                    <div className="w-full text-center text-xs text-gray-400 dark:text-gray-500 font-mono tracking-widest hidden sm:block">
+                      bash - {project.title.toLowerCase().replace(/\s+/g, '-')}
                     </div>
-                    <div className="w-10 sm:hidden" />
-                    <div className="w-10 hidden sm:block" />
                   </div>
                   
-                  {/* Terminal Body */}
-                  <div className="p-6 md:p-8 space-y-7 text-[#cbd5e1] leading-relaxed">
-                    <div className="flex items-center gap-2 flex-wrap">
-                      <span className="text-green-400 font-bold">➜</span> 
-                      <span className="text-blue-400 font-bold">~</span> 
-                      <span className="text-white bg-white/10 px-1 rounded">cat</span> 
-                      <span className="break-all">{project.title.replace(/\s+/g, '_')}.md</span>
-                      <span className="w-2 h-4 bg-white/50 animate-pulse inline-block ml-1" />
-                    </div>
+                  {/* Terminal Canvas */}
+                  <div className="p-6 md:p-8 flex-1 flex flex-col justify-between min-h-[350px]">
+                    <TerminalTypewriter text={terminalContent} />
                     
-                    <div className={`pl-5 border-l-2 border-white/10 space-y-5 transition-colors group-hover:border-white/30`}>
-                      <h3 className="text-xl md:text-2xl font-bold text-white tracking-wide flex items-center gap-3">
-                        <span className="text-2xl">📁</span> {project.title}
-                      </h3>
-                      <p className="opacity-90 leading-loose">
-                        <span className={`${project.accent} font-bold mr-2`}>{">"}</span>
-                        {project.description}
-                      </p>
-                      
-                      <div className="space-y-3 pt-2">
-                        <p className={`${project.accent} font-bold tracking-wider`}>⚙ Key Features:</p>
-                        <ul className="list-disc pl-6 opacity-90 space-y-1.5 marker:text-white/50">
-                          {project.features.map((feat, i) => (
-                            <li key={i}>{feat}</li>
-                          ))}
-                        </ul>
-                      </div>
-
-                      <div className="space-y-2 pt-2">
-                        <p className={`${project.accent} font-bold tracking-wider`}>🛠 Tech Stack:</p>
-                        <p className="opacity-90 pl-1 font-semibold text-white/80">{project.tech.join(", ")}</p>
-                      </div>
-                    </div>
-
-                    {/* Action Buttons inside terminal context */}
-                    <div className="flex flex-wrap gap-4 pt-4 border-t border-white/5">
-                      <a href={project.github} target="_blank" rel="noreferrer" className="flex items-center gap-2 px-6 py-2.5 rounded-md border border-white/20 hover:border-white hover:bg-white/10 hover:shadow-[0_0_20px_rgba(255,255,255,0.2)] transition-all text-white font-medium text-xs uppercase tracking-widest group/btn">
-                        <Github size={16} className="group-hover/btn:scale-110 transition-transform" /> GitHub
+                    {/* Action Links */}
+                    <div className="mt-8 flex flex-wrap gap-4 border-t border-black/10 dark:border-white/10 pt-6">
+                      <a href={project.github} target="_blank" rel="noreferrer" className="flex items-center gap-2 px-5 py-2.5 rounded border border-black/20 dark:border-white/20 hover:border-black dark:hover:border-white hover:bg-black/5 dark:hover:bg-white/10 transition-all text-black dark:text-white font-mono text-xs uppercase tracking-widest">
+                        <Github size={16} /> GitHub
                       </a>
-                      <a href={project.demo} className="flex items-center gap-2 px-6 py-2.5 rounded-md border border-white/20 hover:border-white hover:bg-white/10 hover:shadow-[0_0_20px_rgba(255,255,255,0.2)] transition-all text-white font-medium text-xs uppercase tracking-widest group/btn">
-                        <ExternalLink size={16} className="group-hover/btn:scale-110 transition-transform" /> Live Demo
+                      <a href={project.demo} target="_blank" rel="noreferrer" className="flex items-center gap-2 px-5 py-2.5 rounded bg-black/5 dark:bg-white/10 border border-black/20 dark:border-white/20 hover:bg-black/10 dark:hover:bg-white/20 transition-all text-black dark:text-white font-mono text-xs uppercase tracking-widest">
+                        <ExternalLink size={16} /> Live Demo
                       </a>
                     </div>
                   </div>
                 </div>
               </motion.div>
+
             </motion.div>
           );
         })}
