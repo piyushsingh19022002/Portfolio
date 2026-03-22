@@ -112,7 +112,7 @@ export default function About() {
               whileHover={{ rotate: 0, scale: 1.05 }}
               initial={{ rotate: 3 }}
               animate={{ rotate: 3 }}
-              transition={{ duration: 0.4, ease: "easeOut" }}
+              transition={{ duration: 0.4, ease: easeInOut }}
               className="relative w-full h-full rounded-2xl border border-black/10 dark:border-white/10 shadow-[0_0_30px_rgba(0,0,0,0.05)] dark:shadow-[0_0_30px_rgba(255,255,255,0.05)] overflow-hidden z-10 bg-black/5 dark:bg-white/5"
             >
               <Image 

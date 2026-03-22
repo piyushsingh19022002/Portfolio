@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, easeInOut } from "framer-motion";
 import { Github, ExternalLink } from "lucide-react";
 import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
@@ -72,12 +72,12 @@ export default function Projects() {
 
   const slideInLeft = {
   hidden: { opacity: 0, x: -50 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.8 } }
+  visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: easeInOut } }
 };
 
 const slideInRight = {
   hidden: { opacity: 0, x: 50 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.8 } }
+  visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: easeInOut } }
 };
 
   return (

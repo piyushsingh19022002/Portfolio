@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence , easeInOut} from "framer-motion";
 import { useState } from "react";
 import Image from "next/image";
 
@@ -132,7 +132,7 @@ export default function Certifications() {
               initial={{ opacity: 0, scale: 0.96 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.96 }}
-              transition={{ duration: 0.3, ease: "easeOut" }}
+              transition={{ duration: 0.3, ease: easeInOut }}
               className="w-full bg-white dark:bg-[#0a0a0a] rounded-2xl border border-black/10 dark:border-white/10 p-6 flex flex-col gap-6 shadow-[0_0_50px_rgba(0,0,0,0.05)] dark:shadow-[0_0_50px_rgba(255,255,255,0.02)] group"
             >
               {/* Image Frame */}

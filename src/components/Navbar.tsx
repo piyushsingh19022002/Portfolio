@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, easeInOut } from "framer-motion";
 import { useEffect, useState } from "react";
 import { Moon, Menu, X } from "lucide-react";
 import Link from "next/link";
@@ -68,7 +68,7 @@ export default function Navbar() {
       <motion.div
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
+        transition={{ duration: 0.6, ease: easeInOut }}
         className="fixed top-6 left-6 md:left-10 z-[100]"
       >
         <Link href="/" className="text-2xl font-bold text-black dark:text-white tracking-widest cursor-none">
@@ -80,7 +80,7 @@ export default function Navbar() {
       <motion.nav
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
+        transition={{ duration: 0.6, ease: easeInOut, delay: 0.1 }}
         className="fixed top-6 left-1/2 -translate-x-1/2 z-[100] hidden md:flex items-center gap-2 bg-white/50 dark:bg-white/5 backdrop-blur-md border border-black/10 dark:border-white/10 rounded-full px-6 py-3 shadow-[0_0_30px_rgba(0,0,0,0.05)] dark:shadow-[0_0_30px_rgba(255,255,255,0.02)]"
       >
         {navLinks.map((link) => {
@@ -118,7 +118,7 @@ export default function Navbar() {
       <motion.div
         initial={{ opacity: 0, x: 20 }}
         animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
+        transition={{ duration: 0.6, ease: easeInOut, delay: 0.2 }}
         className="fixed top-6 right-6 md:right-10 z-[100] flex items-center gap-4"
       >
         <ThemeToggle />

@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion , easeInOut} from "framer-motion";
 import { FaReact, FaNodeJs, FaDocker, FaAws, FaGitAlt, FaGithub } from "react-icons/fa";
 import { SiJavascript, SiTailwindcss, SiExpress, SiJsonwebtokens, SiMongodb, SiPostgresql } from "react-icons/si";
 import { TbApi } from "react-icons/tb";
@@ -35,7 +35,7 @@ export default function Skills() {
     visible: { 
       opacity: 1, 
       y: 0, 
-      transition: { duration: 0.5}
+      transition: { duration: 0.5, ease: easeInOut}
     }
   };
 
