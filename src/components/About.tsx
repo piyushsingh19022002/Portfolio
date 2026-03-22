@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, easeInOut } from "framer-motion";
 import { Github, Linkedin, Mail } from "lucide-react";
 import Image from "next/image";
 import myImage from "@/assets/myimage.png";
@@ -19,7 +19,7 @@ export default function About() {
   visible: { 
     opacity: 1, 
     x: 0,
-    transition: { duration: 0.8 }
+    transition: { duration: 0.8, ease: easeInOut }
   }
 };
 
@@ -28,7 +28,7 @@ export default function About() {
   visible: { 
     opacity: 1, 
     x: 0, 
-    transition: { duration: 0.8, delay: 0.2 }
+    transition: { duration: 0.8, delay: 0.2, ease: easeInOut }
   }
 };
 
@@ -37,7 +37,8 @@ export default function About() {
     y: [0, -15, 0],
     transition: {
       duration: 4,
-      repeat: Infinity
+      repeat: Infinity,
+      ease: easeInOut
     }
   }
 };

@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, easeInOut } from "framer-motion";
 import { Code, ExternalLink, Activity, Github } from "lucide-react";
 
 export default function CodingActivity() {
@@ -14,7 +14,7 @@ export default function CodingActivity() {
 
   const itemVariants = {
     hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: easeInOut } }
   };
 
   return (
