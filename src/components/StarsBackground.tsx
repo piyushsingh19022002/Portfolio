@@ -79,7 +79,7 @@ export default function StarsBackground() {
           transition={{
             duration: star.duration,
             repeat: Infinity,
-            ease: "easeInOut",
+            ease: [0.25, 0.1, 0.25, 1],
             delay: star.delay,
           }}
         />

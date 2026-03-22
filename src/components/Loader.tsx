@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, AnimatePresence, easeInOut } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 
 export default function Loader() {
@@ -31,7 +31,7 @@ export default function Loader() {
           key="loader"
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.8, ease: easeInOut }}
+          transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
           className="fixed inset-0 z-[10000] bg-[#020617] flex flex-col items-center justify-center overflow-hidden"
         >
           <motion.div
@@ -42,7 +42,7 @@ export default function Loader() {
               visible: { 
                 opacity: 1, 
                 scale: 1, 
-                transition: { duration: 1, ease: easeInOut, staggerChildren: 0.4 } 
+                transition: { duration: 1, ease: [0.25, 0.1, 0.25, 1], staggerChildren: 0.4 } 
               }
             }}
             className="flex flex-col items-center text-center"
@@ -51,7 +51,7 @@ export default function Loader() {
             <motion.h1 
               variants={{
                 hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: easeInOut } }
+                visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.25, 0.1, 0.25, 1] } }
               }}
               className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-wide"
               style={{ textShadow: "0 0 15px rgba(255,255,255,0.4)" }}
@@ -63,7 +63,7 @@ export default function Loader() {
             <motion.h2
               variants={{
                 hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: easeInOut } }
+                visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.25, 0.1, 0.25, 1] } }
               }}
               className="text-base md:text-xl text-[#cbd5e1] font-medium mt-5 tracking-[0.2em] uppercase"
             >

@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, easeInOut } from "framer-motion";
+import { motion } from "framer-motion";
 import { Github, Linkedin, Mail } from "lucide-react";
 import Image from "next/image";
 import myImage from "@/assets/myimage.png";
@@ -19,7 +19,7 @@ export default function About() {
   visible: { 
     opacity: 1, 
     x: 0,
-    transition: { duration: 0.8, ease: easeInOut }
+    transition: { duration: 0.8, ease: [0.25, 0.1, 0.25, 1] as const }
   }
 };
 
@@ -28,7 +28,7 @@ export default function About() {
   visible: { 
     opacity: 1, 
     x: 0, 
-    transition: { duration: 0.8, delay: 0.2, ease: easeInOut }
+    transition: { duration: 0.8, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] as const }
   }
 };
 
@@ -38,7 +38,7 @@ export default function About() {
     transition: {
       duration: 4,
       repeat: Infinity,
-      ease: easeInOut
+      ease: [0.25, 0.1, 0.25, 1] as const
     }
   }
 };
@@ -112,7 +112,7 @@ export default function About() {
               whileHover={{ rotate: 0, scale: 1.05 }}
               initial={{ rotate: 3 }}
               animate={{ rotate: 3 }}
-              transition={{ duration: 0.4, ease: easeInOut }}
+              transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] as const}}
               className="relative w-full h-full rounded-2xl border border-black/10 dark:border-white/10 shadow-[0_0_30px_rgba(0,0,0,0.05)] dark:shadow-[0_0_30px_rgba(255,255,255,0.05)] overflow-hidden z-10 bg-black/5 dark:bg-white/5"
             >
               <Image 
