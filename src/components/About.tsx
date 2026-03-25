@@ -62,18 +62,15 @@ export default function About() {
             About <span className="bg-gradient-to-r from-gray-500 to-blue-500 bg-clip-text text-transparent">Me</span>
           </motion.h2>
 
-          <motion.div variants={textVariants} className="space-y-5 text-gray-700 dark:text-[#cbd5e1] text-base leading-relaxed font-light">
+          <motion.div variants={textVariants} className="space-y-5 text-gray-700 dark:text-gray-300 text-base leading-relaxed font-light max-w-3xl">
             <p>
-              I am a Computer Science undergraduate (2027) with a strong passion for building scalable and efficient web applications using the MERN stack. As a self-driven developer, I continuously explore new technologies to improve my skills.
+              I’m Piyush Singh — a full-stack developer who enjoys building systems that are not just functional, but meaningful. I don’t see development as just writing code; I see it as designing solutions that can handle real users, real data, and real-world challenges.
             </p>
             <p>
-              I have built real-world projects like a multilingual language learning platform and a community-driven chatbot system, focusing on performance optimization, user engagement, and backend scalability.
+              I didn’t start with clarity — I started with confusion. Errors I couldn’t understand, code that wouldn’t run, and problems that felt impossible at the time. But over time, something changed. Every bug I fixed improved not just my code, but the way I think. What began as curiosity turned into consistency, and consistency turned into confidence. Now, I approach problems with a mindset of breaking them down, understanding them deeply, and solving them the right way.
             </p>
             <p>
-              Along with development, I am actively learning DevOps and Cloud technologies to understand how applications are deployed and scaled in production environments.
-            </p>
-            <p>
-              I am currently seeking opportunities as a Full Stack Developer while expanding my expertise in DevOps and Cloud.
+              Good code solves problems. Great systems prevent them. I believe in writing code that is clean, maintainable, and built for the long run. Because in real-world development, it’s not about how fast something works — it’s about how well it holds up over time.
             </p>
           </motion.div>
 
