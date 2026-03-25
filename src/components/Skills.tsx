@@ -1,84 +1,159 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { FaReact, FaNodeJs, FaDocker, FaAws, FaGitAlt, FaGithub } from "react-icons/fa";
-import { SiJavascript, SiTailwindcss, SiExpress, SiJsonwebtokens, SiMongodb, SiPostgresql } from "react-icons/si";
-import { TbApi } from "react-icons/tb";
+import { 
+  FaHtml5, FaCss3Alt, FaReact, FaNodeJs, FaGitAlt, 
+  FaGithub, FaJava, FaPython, FaServer, FaBrain, 
+  FaUsers, FaComments, FaClock, FaAws 
+} from "react-icons/fa";
+import { 
+  SiJavascript, SiTypescript, SiNextdotjs, SiTailwindcss, 
+  SiFramer, SiMongodb, SiExpress, SiPostgresql, SiVercel, 
+  SiPostman, SiCplusplus, SiMysql, SiDocker, 
+  SiSelenium, SiApachemaven
+} from "react-icons/si";
+import { TbBrandVscode } from "react-icons/tb";
 
-const skillsList = [
-  { name: "React", Icon: FaReact },
-  { name: "JavaScript", Icon: SiJavascript },
-  { name: "Tailwind CSS", Icon: SiTailwindcss },
-  { name: "Node.js", Icon: FaNodeJs },
-  { name: "Express.js", Icon: SiExpress },
-  { name: "REST APIs", Icon: TbApi },
-  { name: "JWT", Icon: SiJsonwebtokens },
-  { name: "Docker", Icon: FaDocker },
-  { name: "AWS (Basics)", Icon: FaAws },
-  { name: "MongoDB", Icon: SiMongodb },
-  { name: "PostgreSQL", Icon: SiPostgresql },
-  { name: "Git", Icon: FaGitAlt },
-  { name: "GitHub", Icon: FaGithub },
+const skillCategories = [
+  {
+    title: "Programming",
+    skills: [
+      { name: "Java", icon: FaJava },
+      { name: "JavaScript", icon: SiJavascript },
+      { name: "C++", icon: SiCplusplus },
+      { name: "Python", icon: FaPython },
+    ]
+  },
+  {
+    title: "Frontend",
+    skills: [
+      { name: "HTML5", icon: FaHtml5 },
+      { name: "CSS3", icon: FaCss3Alt },
+      { name: "ReactJS", icon: FaReact },
+      { name: "Next.js", icon: SiNextdotjs },
+    ]
+  },
+  {
+    title: "Backend",
+    skills: [
+      { name: "Node.js", icon: FaNodeJs },
+      { name: "Express", icon: SiExpress },
+      { name: "REST APIs", icon: FaServer }
+    ]
+  },
+  {
+    title: "Database",
+    skills: [
+      { name: "MongoDB", icon: SiMongodb },
+      { name: "PostgreSQL", icon: SiPostgresql },
+      { name: "MySQL", icon: SiMysql }
+    ]
+  },
+  {
+    title: "Tools",
+    skills: [
+      { name: "Git", icon: FaGitAlt },
+      { name: "GitHub", icon: FaGithub },
+      { name: "VS Code", icon: TbBrandVscode },
+      { name: "Postman", icon: SiPostman }
+    ]
+  },
+  {
+    title: "DevOps & Cloud",
+    skills: [
+      { name: "Docker", icon: SiDocker },
+      { name: "Selenium", icon: SiSelenium },
+      { name: "Maven", icon: SiApachemaven },
+      { name: "AWS", icon: FaAws }
+    ]
+  }
 ];
 
-export default function Skills() {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: { 
-      opacity: 1,
-      transition: { staggerChildren: 0.1 }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { 
-      opacity: 1, 
-      y: 0, 
-      transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] as const}
-    }
-  };
-
+const Skills = () => {
   return (
-    <section id="skills" className="py-24 px-6 lg:px-12 relative z-10 w-full max-w-7xl mx-auto flex flex-col items-center justify-center min-h-[50vh]">
-      
-      {/* Subtle Section Header */}
-      <div className="flex flex-col items-center mb-16">
-        <motion.h2 
-          initial={{ opacity: 0, y: -10 }}
+    <section id="skills" className="w-full py-20 relative z-10 overflow-hidden">
+      <div className="max-w-4xl mx-auto px-6 md:px-10">
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-sm md:text-base font-semibold text-gray-500 dark:text-gray-400 tracking-widest uppercase"
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+          className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-20 font-mono text-center"
         >
-          MY SKILLS
+          ⚡ Skills
         </motion.h2>
+
+        <div className="flex flex-col gap-y-16 md:gap-y-20">
+          {skillCategories.map((cat, catIndex) => (
+            <div key={cat.title} className="flex flex-col items-center w-full">
+              {/* Subtle Category Label */}
+              <motion.h3
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.1 }}
+                className="text-[10px] md:text-xs text-gray-500 dark:text-gray-400 uppercase tracking-[0.3em] md:tracking-[0.4em] text-center mb-8 font-mono select-none"
+              >
+                {cat.title}
+              </motion.h3>
+
+              {/* Grid Cluster */}
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-10 md:gap-12 w-full justify-items-center">
+                {cat.skills.map((skill, index) => {
+                  const Icon = skill.icon;
+                  // Seed for pseudo-random float animation mapping
+                  const randomDelay = ((catIndex * 7) + index) * 0.15 % 2;
+                  // Stagger float speed between 2.5 and 4s
+                  const floatDuration = 2.5 + (index % 3) * 0.6;
+
+                  return (
+                    <motion.div
+                      key={skill.name}
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true, margin: "-50px" }}
+                      transition={{
+                        opacity: { duration: 0.4, delay: index * 0.05 },
+                        scale: { duration: 0.4, delay: index * 0.05, type: "spring", stiffness: 100 }
+                      }}
+                      className="relative group flex items-center justify-center cursor-pointer"
+                    >
+                      {/* Floating Animation Wrapper */}
+                      <motion.div
+                        animate={{ y: [0, -5, 0] }}
+                        transition={{
+                          duration: floatDuration,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                          delay: randomDelay
+                        }}
+                        className="relative flex flex-col items-center justify-center p-3"
+                      >
+                        {/* Tooltip */}
+                        <div className="absolute top-0 -translate-y-full opacity-0 pointer-events-none group-hover:-translate-y-[120%] group-hover:opacity-100 transition-all duration-300 bg-black text-white dark:bg-white dark:text-black text-[10px] md:text-sm font-mono font-bold px-3 py-1.5 rounded-md shadow-lg whitespace-nowrap z-50">
+                          {skill.name}
+                        </div>
+
+                        {/* Icon Container with Backplate and Box Shadow */}
+                        <div className="flex items-center justify-center p-4 rounded-full bg-black/5 dark:bg-white/5 backdrop-blur transition-all duration-300 transform group-hover:scale-[1.2] shadow-[0_0_20px_rgba(0,0,0,0.08)] dark:shadow-[0_0_20px_rgba(255,255,255,0.08)] group-hover:shadow-[0_0_35px_rgba(0,0,0,0.15)] dark:group-hover:shadow-[0_0_35px_rgba(255,255,255,0.25)]">
+                          <Icon className="text-4xl md:text-6xl text-gray-700 dark:text-gray-300 opacity-80 group-hover:text-black dark:group-hover:text-white group-hover:opacity-100 transition-colors duration-300" />
+                        </div>
+                      </motion.div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+
+              {/* Faint Divider between clusters */}
+              {catIndex !== skillCategories.length - 1 && (
+                <div className="w-1/3 h-[1px] bg-gradient-to-r from-transparent via-black/10 dark:via-white/5 to-transparent mt-12 md:mt-16" />
+              )}
+            </div>
+          ))}
+        </div>
       </div>
-
-      {/* Skills Icon Flex Grid */}
-      <motion.div 
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        className="flex flex-wrap justify-center gap-10 md:gap-14 max-w-4xl mx-auto"
-      >
-        {skillsList.map((skill, index) => (
-          <motion.div
-            key={index}
-            variants={itemVariants}
-            className="flex flex-col items-center gap-4 group w-[80px] sm:w-[100px]"
-          >
-            {/* Minimal SVG Icon */}
-            <skill.Icon className="text-5xl sm:text-6xl text-gray-400 dark:text-gray-400 group-hover:text-black dark:group-hover:text-white group-hover:scale-110 transition-all duration-300" />
-            
-            {/* Descriptive Label */}
-            <span className="text-gray-500 dark:text-gray-400 font-medium text-xs sm:text-sm text-center group-hover:text-black dark:group-hover:text-white transition-colors duration-300">
-              {skill.name}
-            </span>
-          </motion.div>
-        ))}
-      </motion.div>
-
     </section>
   );
-}
+};
+
+export default Skills;
